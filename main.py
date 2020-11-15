@@ -28,13 +28,12 @@ groups = [df[i:i+N] for i in range(0, df.shape[0], N)]
 # maybe we would like to add the possiblity to check if
 # last group is smaller than M and if so, 
 # merge them to the second last one
-if groups[-1].shape[0] < M:
+if groups[-1].shape[0] < M and df.shape[0] > N:
     groups[-2] = pd.concat([groups[-2], groups[-1]])
     groups.pop()
 
 # for each group
 for i, group in enumerate(groups, start=1):
-    print(i)
     ROOM = api.rooms.create(SPACE_TITLE + ' #' + str(i))
     for i, row in group.iterrows():
         # assumes the first column is a valid email address
