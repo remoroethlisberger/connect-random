@@ -20,6 +20,7 @@ N = args.n
 M = 5
 FILENAME = args.file
 SPACE_TITLE = 'Holiday Chat Room'
+OBSERVERS = ['rrothlis@cisco.com'] # list of observers
 
 df = pd.read_csv(FILENAME)
 df = df.sample(frac=1) # shuffle the main CSV file
@@ -35,6 +36,8 @@ if groups[-1].shape[0] < M and df.shape[0] > N:
 # for each group
 for i, group in enumerate(groups, start=1):
     ROOM = api.rooms.create(SPACE_TITLE + ' #' + str(i))
+    for observer in OBSERVERS:
+        api.memberships.create(roomId=ROOM.id, personEmail=observer)
     for i, row in group.iterrows():
         # assumes the first column is a valid email address
         email = row.iloc[0]
