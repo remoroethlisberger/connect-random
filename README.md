@@ -7,4 +7,8 @@ First create a bot [here](https://developer.webex.com/) and copy the Bot access 
 and now you are ready to use the Webex Bot API to automatically create Spaces (aka Rooms) of a size of n people by using:
 ```python3 -f sample.csv -n 7```
 
+If you want to send a message to all the spaces created, you can use 
 
+```python3 send_notification.py```
+
+at anytime
